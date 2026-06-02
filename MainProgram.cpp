@@ -60,7 +60,7 @@ public:
 
     // TODO 3: Override area().  Area of a circle = PI * r * r.
     //         Use override.
-    double area() const override { return radius * radius * 3.14; }
+    double area() const override { return 3.14 *radius * radius; }
 };
 
 // --- Derived class: Rectangle -----------------------------------
@@ -115,11 +115,10 @@ std::string largestShapeName(const std::vector<Shape*>& shapes) {
     if(shapes.empty())
         return "";
         
-    Shape* largest = shapes[0];
-    double max = largest->area();
-    for(int i=1; i<shapes.size(); i++){
-        if(shapes[i]->area() > max)
-            largest = shapes[i];
+    const Shape* largest = shapes[0];
+    for(const Shape* s: shapes){
+        if(s->area() > largest->area())
+            largest = s;
     }
     return largest->getName();
     
